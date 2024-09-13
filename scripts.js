@@ -96,13 +96,18 @@ async function publicarProjeto(nomeDoProjeto, descricaoDoProjeto, imagemDoProjet
                 const itemTitulo = document.createElement("h2"); // Cria o H2 - Title
                 itemTitulo.innerText = nomeDoProjeto;
                 itemDaLista.appendChild(itemTitulo);
+
+                const containerDescriptionImg = document.createElement("div"); // Cria o <Div> (container-description-img)
+                containerDescriptionImg.classList.add("container-description-img");
                 const itemDescricao = document.createElement("p"); // Cria o P - Description
                 itemDescricao.innerText = descricaoDoProjeto;
-                itemDaLista.appendChild(itemDescricao);
+                containerDescriptionImg.appendChild(itemDescricao);
                 const itemImg = document.createElement("img"); // Cria o IMG
                 itemImg.src = imagemDoProjeto;
                 itemImg.classList.add("item-img");
-                itemDaLista.appendChild(itemImg);
+                containerDescriptionImg.appendChild(itemImg);
+                itemDaLista.appendChild(containerDescriptionImg);
+
                 const hr = document.createElement("hr"); // Cria o HR
                 itemDaLista.appendChild(hr);
                 

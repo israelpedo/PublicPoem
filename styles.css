@@ -169,8 +169,13 @@ main {
     font-size: 12px;
     line-height: 20px;
 }
+.container-description-img {
+    display: flex;
+    justify-content: space-between;
+}
 .item-img {
     width: 100px;
+    height: 100%;
 }
 /* MAIN ABOUT */
 .main-about {
