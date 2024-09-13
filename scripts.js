@@ -87,7 +87,7 @@ const botaoPublicar = document.querySelector('.botao-publicar');
 
 // Function to send information to the DB / SIMULATION. // In this case, create the item in the Feed.
 const poemsList = document.querySelector('.poems-list'); // <ul>
-async function publicarProjeto(nomeDoProjeto, descricaoDoProjeto, autorDoProjeto, tagsProjeto) {
+async function publicarProjeto(nomeDoProjeto, descricaoDoProjeto, imagemDoProjeto, autorDoProjeto, tagsProjeto) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const deuCerto = Math.random() > 0.3;
@@ -99,23 +99,27 @@ async function publicarProjeto(nomeDoProjeto, descricaoDoProjeto, autorDoProjeto
                 const itemDescricao = document.createElement("p"); // Cria o P - Description
                 itemDescricao.innerText = descricaoDoProjeto;
                 itemDaLista.appendChild(itemDescricao);
+                const itemImg = document.createElement("img"); // Cria o IMG
+                itemImg.src = imagemDoProjeto;
+                itemImg.classList.add("item-img");
+                itemDaLista.appendChild(itemImg);
                 const hr = document.createElement("hr"); // Cria o HR
                 itemDaLista.appendChild(hr);
                 
                 const containerDateTag = document.createElement("div"); // Cria o <Div> (container-date-tag)
                 containerDateTag.classList.add("container-date-tag");
-                const itemData = document.createElement("p"); // Cria o P - Date/Time
-                itemData.innerText = `${new Date().toLocaleDateString("en", { weekday: "long" })} (${new Date().toLocaleDateString()}) at ${new Date().toLocaleTimeString("en", { hour: "numeric", minute: "numeric" })}`;
-                itemData.classList.add("date-tag");
                 const itemAuthor = document.createElement("p"); // Cria o P - Author
                 itemAuthor.innerText = autorDoProjeto;
                 itemAuthor.classList.add("date-tag");
+                const itemData = document.createElement("p"); // Cria o P - Date/Time
+                itemData.innerText = `${new Date().toLocaleDateString("en", { weekday: "long" })} (${new Date().toLocaleDateString()}) at ${new Date().toLocaleTimeString("en", { hour: "numeric", minute: "numeric" })}`;
+                itemData.classList.add("date-tag");
                 const itemTag = document.createElement("p"); // Cria o P - Tag
                 itemTag.innerText = tagsProjeto;
                 itemTag.classList.add("date-tag");
 
-                containerDateTag.appendChild(itemData);
                 containerDateTag.appendChild(itemAuthor);
+                containerDateTag.appendChild(itemData);
                 containerDateTag.appendChild(itemTag);
 
                 itemDaLista.appendChild(containerDateTag);
@@ -135,12 +139,14 @@ botaoPublicar.addEventListener('click', async (evento) => {
 
     const nomeDoProjeto = document.getElementById('nome').value;
     const descricaoDoProjeto = document.getElementById('descricao').value;
+    const imagemDoProjeto = document.getElementById('main-imagem').src;
     const autorDoProjeto = document.getElementById('author').value;
     const tagsProjeto = Array.from(listaTags.querySelectorAll('p')).map((tag) => tag.textContent); // .map to get only the textual content, not the entire <p>agraph</p>
 
     try {
-        const resultado = await publicarProjeto(nomeDoProjeto, descricaoDoProjeto, autorDoProjeto, tagsProjeto);
+        const resultado = await publicarProjeto(nomeDoProjeto, descricaoDoProjeto, imagemDoProjeto, autorDoProjeto, tagsProjeto);
         alert('Posted successfully! Go to the feed to see the poems.');
+        console.log(imagemDoProjeto);
         checkEmptyList(poemsList);
     }catch(error) {
         alert('Not published! You depend on luck, so try again =)');
