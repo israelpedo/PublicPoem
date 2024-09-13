@@ -48,7 +48,7 @@ listaTags.addEventListener('click', (evento) => {
     }
 });
 // Defining available TAGs.
-const tagsDisponiveis = ['Love', 'Romance', 'Sad', 'Happy', 'All'];
+const tagsDisponiveis = ['Love','Romance','Sad','Happy','All','love','romance','sad','happy','all'];
 // Function that checks whether the TAG that the user entered is an available TAG.
 async function verificaTagsDisponiveis(tagTexto) {
     return new Promise((resolve) => { // Promessa, pois nao sabemos quanto tempo ira levar ate o banco de dados retornar se é uma TAG disponivel
@@ -73,7 +73,7 @@ inputTags.addEventListener('keypress', async (evento) => {
                     inputTags.value = '';
                 }else {
                     alert('Tag not found. Please enter a valid tag.');
-                    alert('Available tags: '+tagsDisponiveis);
+                    alert('Available tags: Love / Romance / Sad / Happy / All');
                 }
             }catch(error) { // Error in the functionality request.
                 console.error('Error checking the existence of the tag:', error);
